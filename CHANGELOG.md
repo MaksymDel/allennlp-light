@@ -7,5 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [v1.0.0](https://github.com/deldelmax/allennlp-light/releases/tag/v1.0.0) - 2022-08-11
+
 ## [v0.0.0](https://github.com/deldelmax/allennlp-light/releases/tag/v0.0.0) - 2022-08-11
 ## [v1.0.0](https://github.com/deldelmax/allennlp-light/releases/tag/v1.0.0) - 2022-08-11
