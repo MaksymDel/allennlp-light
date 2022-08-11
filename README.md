@@ -1,5 +1,16 @@
 # allennlp-light
 
+## About 
+
+As [AllenNLP framework](https://github.com/allenai/allennlp) honorably retires and will not update dependencies, *allennlp-light* is a port of AllenNLP's awesome `modules` and `nn` portions into a standalone package with minimum dependencies.\
+*allennlp-light* natively integrates with [Tango](https://github.com/allenai/tango) (check it out!) by using its `FromParams/Registrable` so you get allennlp's components for free, registered, and ready to use. \
+
+The modules are thoroughly [documented](https://docs.allennlp.org/main/) [and](https://github.com/allenai/allennlp/tree/main/tests/nn) [tested](https://github.com/allenai/allennlp/tree/main/tests/modules) in the original [AllenNLP repository](https://github.com/allenai/allennlp).
+
+To learn how to use them, check the relevan section in the [AllenNLP guide](https://guide.allennlp.org/common-architectures).
+
+AllenNLP is licensed under Apache 2 Licence, so please see below the *copyright* notice and the *list of changes*.
+
 ## Installation
 
 1) Install PyTorch: [pytorch.org](https://pytorch.org/)
@@ -12,17 +23,6 @@
 >>> Seq2SeqEncoder.list_available()
 ['compose', 'feedforward', 'gated-cnn-encoder', 'pass_through', 'gru', 'lstm', 'rnn', 'augmented_lstm', 'alternating_lstm', 'stacked_bidirectional_lstm', 'pytorch_transformer']
 ```
-
-## About 
-
-As [AllenNLP framework](https://github.com/allenai/allennlp) honorably retires and will not update dependencies, *allennlp-light* is a port of AllenNLP's awesome `modules` and `nn` portions into a standalone package with minimum dependencies.\
-*allennlp-light* natively integrates with [Tango](https://github.com/allenai/tango) (check it out!) by using its `FromParams/Registrable` so you get allennlp's components for free, registered, and ready to use. \
-
-The modules are thoroughly [documented](https://docs.allennlp.org/main/) [and](https://github.com/allenai/allennlp/tree/main/tests/nn) [tested](https://github.com/allenai/allennlp/tree/main/tests/modules) in the original [AllenNLP repository](https://github.com/allenai/allennlp).
-
-To learn how to use them, check the relevan section in the [AllenNLP guide](https://guide.allennlp.org/common-architectures).
-
-AllenNLP is licensed under Apache 2 Licence, so please see below the *copyright* notice and the *list of changes*.
 
 ## Copyright
 
