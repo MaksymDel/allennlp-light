@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - 'my_package/**'
+      - 'allennlp_light/**'
 
 jobs:
   changelog:

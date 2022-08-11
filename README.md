@@ -1,110 +1,102 @@
-# python-package-template
+# allennlp-light
 
-This is a template repository for Python package projects.
+## Installation
 
-## In this README :point_down:
+1) Install PyTorch: [pytorch.org](https://pytorch.org/)
+2) `pip install allennlp-light`
 
-- [Features](#features)
-- [Usage](#usage)
-  - [Initial setup](#initial-setup)
-  - [Creating releases](#creating-releases)
-- [Projects using this template](#projects-using-this-template)
-- [FAQ](#faq)
-- [Contributing](#contributing)
+## Example
+    
+```python
+>>> from allennlp_light import Seq2SeqEncoder
+>>> Seq2SeqEncoder.list_available()
+['compose', 'feedforward', 'gated-cnn-encoder', 'pass_through', 'gru', 'lstm', 'rnn', 'augmented_lstm', 'alternating_lstm', 'stacked_bidirectional_lstm', 'pytorch_transformer']
+```
 
-## Features
+## About 
 
-This template repository comes with all of the boilerplate needed for:
+As [AllenNLP framework](https://github.com/allenai/allennlp) honorably retires and will not update dependencies, *allennlp-light* is a port of AllenNLP's awesome `modules` and `nn` portions into a standalone package with minimum dependencies.\
+*allennlp-light* natively integrates with [Tango](https://github.com/allenai/tango) (check it out!) by using its `FromParams/Registrable` so you get allennlp's components for free, registered, and ready to use. \
 
-⚙️ Robust (and free) CI with [GitHub Actions](https://github.com/features/actions):
-  - Unit tests ran with [PyTest](https://docs.pytest.org) against multiple Python versions and operating systems.
-  - Type checking with [mypy](https://github.com/python/mypy).
-  - Linting with [flake8](https://flake8.pycqa.org/en/latest/).
-  - Formatting with [isort](https://pycqa.github.io/isort/) and [black](https://black.readthedocs.io/en/stable/).
+The modules are thoroughly [documented](https://docs.allennlp.org/main/) [and](https://github.com/allenai/allennlp/tree/main/tests/nn) [tested](https://github.com/allenai/allennlp/tree/main/tests/modules) in the original [AllenNLP repository](https://github.com/allenai/allennlp).
 
-🤖 [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/) configuration to keep your dependencies up-to-date.
+To learn how to use them, check the relevan section in the [AllenNLP guide](https://guide.allennlp.org/common-architectures).
 
-📄 Great looking API documentation built using [Sphinx](https://www.sphinx-doc.org/en/master/) (run `make docs` to preview).
+AllenNLP is licensed under Apache 2 Licence, so please see below the *copyright* notice and the *list of changes*.
 
-🚀 Automatic GitHub and PyPI releases. Just follow the steps in [`RELEASE_PROCESS.md`](./RELEASE_PROCESS.md) to trigger a new release.
+## Copyright
 
-## Usage
+Below is the copyright notice that applies to all source codes.
 
-### Initial setup
+```
+Copyright 2017 The Allen Institute for Artificial Intelligence
+Adapted by Maksym Del from https://github.com/allenai/allennlp/tree/8571d930fe6dc6291c6351c6e599576b007cf22f
+SPDX-License-Identifier: Apache-2.0
+```
 
-1. [Create a new repository](https://github.com/allenai/python-package-template/generate) from this template with the desired name of your project.
+## List of changes
 
-    *Your project name (i.e. the name of the repository) and the name of the corresponding Python package don't necessarily need to match, but you might want to check on [PyPI](https://pypi.org/) first to see if the package name you want is already taken.*
+I kept the log of how I got from allennlp to allennlp-light.
 
-2. Create a Python 3.7 or newer virtual environment.
+```
+Copied with changes from 
+   
+    https://github.com/allenai/allennlp/tree/8571d930fe6dc6291c6351c6e599576b007cf22f
 
-    *If you're not sure how to create a suitable Python environment, the easiest way is using [Miniconda](https://docs.conda.io/en/latest/miniconda.html). On a Mac, for example, you can install Miniconda using [Homebrew](https://brew.sh/):*
+Only codes from allennlp/modules and allennlp/nn folders are copied.
 
-    ```
-    brew install miniconda
-    ```
+The purpose is to integrate AllenNLP modules with the Tango project (https://github.com/allenai/tango).
 
-    *Then you can create and activate a new Python environment by running:*
+The following is the list of the changes made to the AllenNLP original (allennlp/modules and allennlp/nn) files:
 
-    ```
-    conda create -n my-package python=3.9
-    conda activate my-package
-    ```
+Removed files and folders:
+- allennlp/modules/transformer
+- allennlp/modules/token_embedders
+- allennlp/modules/text_field_embedders
+- allennlp/modules/backbones
+- allennlp/modules/elmo.py
+- allennlp/modules/elmo_lstm.py
+- allennlp/nn/parallel
+- allennlp/nn/checkpoint
+- allennlp/nn/beam_search.py
+- allennlp/nn/module.py
 
-3. Now that you have a suitable Python environment, you're ready to personalize this repository. Just run:
+Removed from the nn/util.py file:
+- line: from itertools import chain
+- line: import torch.distributed as dist
+- line: from allennlp.common.util import int_to_device, is_distributed, is_global_primary
+- func: find_text_field_embedder
+- func: find_embedding_layer
+- func: move_to_device
+- func: distributed_device
+- line: _V = TypeVar("_V", int, float, torch.Tensor)
+- func: dist_reduce
+- func: dist_reduce_sum
+- func: _collect_state_dict
+- func: load_state_dict_distributed
+- func: _broadcast_params
+- class: _IncompatibleKeys
+- func: _check_incompatible_keys 
 
-    ```
-    pip install -r setup-requirements.txt
-    python scripts/personalize.py
-    ```
+Removed from the nn/__init__.py file:
+- line: from allennlp.nn.module import Module
 
-    And then follow the prompts.
+Removed/added from/to the modules/__init__.py file:
+- line: from allennlp.modules.backbones import Backbone
+- line: from allennlp.modules.elmo import Elmo
+- line: from allennlp.modules.text_field_embedders import TextFieldEmbedder
+- line: from allennlp.modules.token_embedders import TokenEmbedder, Embedding
++ line: from allennlp.modules.span_extractors import SpanExtractor
 
-    :pencil: *NOTE: This script will overwrite the README in your repository.*
+Removed/added from/to the modules/span_extractors/span_extractor_with_span_width_embedding.py file:
+- from allennlp.modules.token_embedders.embedding import Embedding
++ from torch.nn import Embedding
 
-4. Commit and push your changes, then make sure all GitHub Actions jobs pass.
+Removed from /nn/initializers.py file:
+- class: PretrainedModelInitializer
 
-5. (Optional) If you plan on publishing your package to PyPI, add repository secrets for `PYPI_USERNAME` and `PYPI_PASSWORD`. To add these, go to "Settings" > "Secrets" > "Actions", and then click "New repository secret".
-
-    *If you don't have PyPI account yet, you can [create one for free](https://pypi.org/account/register/).*
-
-6. (Optional) If you want to deploy your API docs to [readthedocs.org](https://readthedocs.org), go to the [readthedocs dashboard](https://readthedocs.org/dashboard/import/?) and import your new project.
-
-    Then click on the "Admin" button, navigate to "Automation Rules" in the sidebar, click "Add Rule", and then enter the following fields:
-
-    - **Description:** Publish new versions from tags
-    - **Match:** Custom Match
-    - **Custom match:** v[vV]
-    - **Version:** Tag
-    - **Action:** Activate version
-
-    Then hit "Save".
-
-    *After your first release, the docs will automatically be published to [your-project-name.readthedocs.io](https://your-project-name.readthedocs.io/).*
-
-### Creating releases
-
-Creating new GitHub and PyPI releases is easy. The GitHub Actions workflow that comes with this repository will handle all of that for you.
-All you need to do is follow the instructions in [RELEASE_PROCESS.md](./RELEASE_PROCESS.md).
-
-## Projects using this template
-
-Here is an incomplete list of some projects that started off with this template:
-
-- [ai2-tango](https://github.com/allenai/tango)
-- [cached-path](https://github.com/allenai/cached_path)
-- [beaker-py](https://github.com/allenai/beaker-py)
-- [gantry](https://github.com/allenai/beaker-gantry)
-
-☝️ *Want your work featured here? Just open a pull request that adds the link.*
-
-## FAQ
-
-#### Should I use this template even if I don't want to publish my package?
-
-Absolutely! If you don't want to publish your package, just delete the `docs/` directory and the `release` job in [`.github/workflows/main.yml`](https://github.com/allenai/python-package-template/blob/main/.github/workflows/main.yml).
-
-## Contributing
-
-If you find a bug :bug:, please open a [bug report](https://github.com/allenai/python-package-template/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
-If you have an idea for an improvement or new feature :rocket:, please open a [feature request](https://github.com/allenai/python-package-template/issues/new?assignees=&labels=Feature+request&template=feature_request.md&title=).
+Renamed across all files and folders:
+* from allennlp.common.checks import ConfigurationError -> from tango.common.exceptions import ConfigurationError 
+* from allennlp.common -> from tango.common // this line redirects imports of Registrable and FromParams classes to Tango versions
+* allennlp -> allennlp-light
+```

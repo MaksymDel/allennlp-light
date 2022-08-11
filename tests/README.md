@@ -1,0 +1,1 @@
+The modules are thoroughly [documented](https://docs.allennlp.org/main/) [and](https://github.com/allenai/allennlp/tree/main/tests/nn) [tested](https://github.com/allenai/allennlp/tree/main/tests/modules) in the original [AllenNLP repository](https://github.com/allenai/allennlp).

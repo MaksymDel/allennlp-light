@@ -58,11 +58,6 @@ jobs:
                 isort --check .
                 black --check .
 
-          - python: '3.10'
-            task:
-              name: Docs
-              run: cd docs && make html
-
     steps:
       - uses: actions/checkout@v3
 
@@ -88,7 +83,7 @@ jobs:
         if: always()
         run: |
           . .venv/bin/activate
-          pip uninstall -y my-package
+          pip uninstall -y allennlp-light
 
   release:
     name: Release
