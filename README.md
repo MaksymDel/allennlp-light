@@ -36,7 +36,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## List of changes
 
-I kept the log of how I got from allennlp to allennlp-light.
+To make sure users know exactly what they are using, I kept the log of how I got from `allennlp` to `allennlp-light`.
 
 ```
 Copied with changes from 
